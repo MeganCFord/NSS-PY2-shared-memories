@@ -11,38 +11,21 @@ class Mary:
     Arguments: 1 optional string message. ex "this is a  message."
     '''
     def __init__(self):
-        self.memories_list = []
-        self.mary_memories_library = {"Mary": [], "Margaret": []}
-        self.deserialize()
+        self.mary_memories_library = self.deserialize()
 
     def deserialize(self):
         '''
-        opens memories.txt file and puts results into self.memories_list. automatically runs dictionaryize function to convert list to dictionary.
+        opens memories.txt file and returns the results, which are a dictionary. Creates file if none exists.
 
         Arguments: none
         '''
         try:
             with open('memories.txt', 'rb') as m:
-                self.memories_list = pickle.load(m)
-                print('loaded list of memories')
+                library = pickle.load(m)
 
         except FileNotFoundError:
-                self.memories_list = []
-                print('list was empty')
-
-        self.dictionaryize()
-
-    def dictionaryize(self):
-        '''
-        runs automatically after deserialization, because a .txt file returns a list. puts each message into its appropriate key ("mary" or "margaret") in the mary_memories_library dictionary.
-
-        Arguments: none
-        '''
-        for memory in self.memories_list:
-            if memory[0] == "G":
-                self.mary_memories_library["Margaret"].append(memory[1:])
-            else:
-                self.mary_memories_library["Mary"].append(memory[1:])
+                library = {"Mary": [], "Margaret": []}
+        return library
 
     def add_to_mary_memories(self, message):
         '''
@@ -55,25 +38,12 @@ class Mary:
 
     def serialize(self):
         '''
-        Writes the contents of self.memories_list into a .txt file called 'memories.txt'. First it converts the memories_library back to a list via self.rebuild_memories_list.
+        Writes the contents of self.mary_memories_library into a .txt file called 'memories.txt'.
 
         Arguments: none
         '''
-        self.rebuild_memories_list()
         with open('memories.txt', 'wb+') as m:
-            pickle.dump(self.memories_list, m)
-
-    def rebuild_memories_list(self):
-        '''
-        runs before serialization, after addition of new memory to memories dictionary. Converts the entire dictionary back into a list, to be written to txt file.
-
-        Arguments: none
-        '''
-        self.memories_list = []
-        for mary_memory in self.mary_memories_library["Mary"]:
-            self.memories_list.append("M" + mary_memory)
-        for margaret_memory in self.mary_memories_library["Margaret"]:
-            self.memories_list.append("G" + margaret_memory)
+            pickle.dump(self.mary_memories_library, m)
 
     def print_out_messages(self):
         '''
