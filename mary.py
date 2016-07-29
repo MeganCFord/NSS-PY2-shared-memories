@@ -1,13 +1,19 @@
 import pickle
 import sys
+import time
 
 
 class Mary:
-    def __init__(self, message):
+    '''
+    Mary and Margaret share memories. This class, when run with a command line argument, adds a memory to Mary's memories and prints all the memories.
+    Without an argument, it simply prints all the memories.
+
+    Arguments: 1 optional string message. ex "this is a  message."
+    '''
+    def __init__(self):
         self.memories_list = []
-        self.mary_memories_library = {"Mary": [], "Margaret": []}
+        self.margaret_memories_library = {"Mary": [], "Margaret": []}
         self.deserialize()
-        self.add_to_mary_memories(message)
 
     def deserialize(self):
         '''
@@ -84,5 +90,15 @@ class Mary:
 
 
 if __name__ == '__main__':
-    app = Mary(sys.argv[1])
+    # run: if mary.py is run with a command line argument, we add the message then print all the messages. if there is no command line argument, we simply print all the messages.
+    app = Mary()
+    message = sys.argv[1] if len(sys.argv) > 1 else None
+
+    if message is not None:
+        print("adding new message \n")
+        app.add_to_mary_memories(message)
+    else:
+        print("printing all messages \n")
+
+    time.sleep(.6)
     app.print_out_messages()
