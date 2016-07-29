@@ -12,7 +12,7 @@ class Mary:
     '''
     def __init__(self):
         self.memories_list = []
-        self.margaret_memories_library = {"Mary": [], "Margaret": []}
+        self.mary_memories_library = {"Mary": [], "Margaret": []}
         self.deserialize()
 
     def deserialize(self):
