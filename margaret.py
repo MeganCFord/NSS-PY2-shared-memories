@@ -9,6 +9,9 @@ class Margaret:
     Without an argument, it simply prints all the memories.
 
     Arguments: 1 optional string message. ex "this is a  message."
+
+    methods: deserialize, add_to_margaret_memories, serialize, print_out_messages
+
     '''
     def __init__(self):
         self.margaret_memories_library = self.deserialize()
@@ -27,7 +30,6 @@ class Margaret:
                 library = {"Mary": [], "Margaret": []}
 
         return library
-
 
     def add_to_margaret_memories(self, message):
         '''

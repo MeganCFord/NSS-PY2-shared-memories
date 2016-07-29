@@ -9,6 +9,8 @@ class Mary:
     Without an argument, it simply prints all the memories.
 
     Arguments: 1 optional string message. ex "this is a  message."
+
+    methods: deserialize, add_to_mary_memories, serialize, print_out_messages
     '''
     def __init__(self):
         self.mary_memories_library = self.deserialize()
